@@ -1,17 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+import ScrollToTop from './components/ScrollToTop'
+
+import SnackbarProvider from './HOCs/SnackbarContext'
+import App from './app/App'
+import './index.css'
+import { store } from './store'
+
+ReactDOM.render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <Router>
+                <ScrollToTop />
+                <SnackbarProvider>
+                    <App />
+                </SnackbarProvider>
+            </Router>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
+)
